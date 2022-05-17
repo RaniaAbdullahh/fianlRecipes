@@ -1,7 +1,8 @@
 
 import { useState, useEffect } from "react";
 import "./cards.css";
-import {Card,Button } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 export default function FavRecipe() {
     const [favRecipes, setRecipes]= useState()
 
@@ -40,19 +41,28 @@ export default function FavRecipe() {
 
     return (
       <>
-        <h1>Favourite Recipes Page</h1>
+            <h1>Favourite Recipes Page</h1>
+            <Container fluid className="main-container">
+                <div className="d-flex flex-wrap justify-content-between w-75 ms-auto me-auto">
+
             {favRecipes && favRecipes.map((recipe) => {
                 return (
-                  <Card style={{ width: "18rem" }}>
+                  <Card
+                    style={{
+                      width: "18rem",
+                      textAlign: "center",
+                      marginTop: "3rem",
+                      boxShadow:
+                        "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                    }}
+                  >
                     <Card.Img variant="top" src={recipe.image} />
                     <Card.Body className="cardBody">
                       <Card.Title>{recipe.title}</Card.Title>
                       <Card.Text className="scrollBar">
                         {recipe.summary}
                       </Card.Text>
-                      <Card.Text >
-                        {recipe.comment}
-                      </Card.Text>
+                      <Card.Text>{recipe.comment}</Card.Text>
                       <Card.Text>{recipe.readyInMinutes} Minutes</Card.Text>
                       <Button
                         variant="primary"
@@ -65,6 +75,9 @@ export default function FavRecipe() {
                 );
             })
             }
+                </div>
+                
+              </Container>
     </>
     );
 }
